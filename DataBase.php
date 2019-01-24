@@ -14,3 +14,29 @@ function getConnectionAndCreateAll(){
     createMembersTable//Indsætter nogen aktier designet på forhånd.
     return $connect;
 }
+function createChatsTable($connection){
+        $sql = "CREATE TABLE ChromeChat.CHATS (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, navn VARCHAR(300) NOT NULL)";
+        $tbCreated = $connection->query($sql);
+
+        //debug bekseder
+        if($GLOBALS['debug']){
+            if ($tbCreated) {
+                echo "<br>DEBUG:able chat created successfully";
+            } else {
+                echo "<br>DEBUG:Error creating chat: " . $connection->error;
+            }
+        }
+    }
+function createChatsTable($connection){
+     $sql = "CREATE TABLE ChromeChat.MEMBERS (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, user_id INT(6) UNSIGNED, aktie_id INT(6) UNSIGNED, antal INT(6), omkostning DECIMAL(8,2) NOT NULL, FOREIGN KEY (user_id) REFERENCES ChromeChat.USERS(id), FOREIGN KEY (aktie_id) REFERENCES ChromeChat.AKTIER(id))";
+        $tbCreated = $connection->query($sql);
+
+        //debug bekseder
+        if($GLOBALS['debug']){
+            if ($tbCreated) {
+                echo "<br>DEBUG:able chat created successfully";
+            } else {
+                echo "<br>DEBUG:Error creating chat: " . $connection->error;
+            }
+        }
+}
