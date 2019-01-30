@@ -12,12 +12,14 @@
     $connection             = getConnectionAndCreateAll();  //vi opretter alle tabeller og databaser og får at vide hvad vores Connection er. Dette gøres igennem database.php
     $brugerEksisterer       = false;    //sætter den som falsk fordi det er bedre at sige det er forkert end bare at lade hvem som helst ind.
   
-    if(doesUserNameAndPasswordExists($connection,$navn,$password)){ //tjekker om navnet og passwordet eksistere.
-        echo "<br>Velkommen ".$navn;    //siger velkommen
-        $brugerEksisterer   = true;     //siger at vores bruger eksistere
-    }else if (doesUserNameExists($connection,$navn)){   //tjekker om kun navnet eksistere
-        echo "<br>Der eksisterer allerede en bruger med dette navn - men password er forkert!";
-        $brugerEksisterer   = false;
+    if (doesUserNameExists($connection,$navn)){   //tjekker om kun navnet eksistere
+        if(doesPasswordExists($connection,$navn,$password)){ //tjekker om navnet og passwordet eksistere.
+            echo "<br>Velkommen ".$navn;    //siger velkommen
+            $brugerEksisterer   = true;     //siger at vores bruger eksistere
+        }else{
+            echo "<br>Der eksisterer allerede en bruger med dette navn - men password er forkert!";
+            $brugerEksisterer   = false;
+        }
     }else{  //køre hvis hverken navn eller password er rigtigt.
         echo "<br>Bruger oprettet";
         $brugerEksisterer   = createUser($connection,$navn,$password);
@@ -29,7 +31,7 @@
         $_SESSION['navn']       = $navn;
         $_SESSION['password']   = $password; 
         $_SESSION['connection'] = $connection;
-        $_SESSION['user_id']    = doesUserNameAndPasswordExists($connection,$navn,$password);
+        $_SESSION['user_id']    = getUserId($connection,$navn);
         //Viser brugerens data - aktier osv.
         include "brugerSubSide.php";
     }
