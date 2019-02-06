@@ -1,11 +1,12 @@
 <?php
     session_start();
     include "database.php";
-    $id = $_POST['aktie_id']
+    $ChatId = $_POST['ChatId'];
     echo "
-        <form action='CreatingChat.php' method='post'>
+        <form action='AddMember.php' method='post'>
             <td><input type='text' name='navn' value='Username'></td>
-            <td><input type='submit' value='Lav'></td>
+            <input type='hidden' name='ChatId' value=".$ChatId.">
+            <td><input type='submit' value='Tilføj Bruger'></td>
         </form>
     ";
 ?>

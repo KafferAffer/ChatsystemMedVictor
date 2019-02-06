@@ -138,7 +138,7 @@ function createChat($connection, $Chatnavn, $Brugerid){
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
     
-    addMember($connection, $row['id'], $Brugerid);
+    $MemberAdded = addMember($connection, $row['id'], $Brugerid);
     
     //debug beskeder
     if($GLOBALS['debug']){
@@ -196,8 +196,9 @@ function getChat($connection,$ChatId){
 }
 
 function addMember($connection, $Chatid, $Brugerid){
-    $sqlMember ="INSERT INTO ChromeChat.MEMBER (`user_id`, `chat_id`) VALUES ('".$Brugerid."','".Chatid."')";
+    $sqlMember ="INSERT INTO ChromeChat.MEMBER (`user_id`, `chat_id`) VALUES ('".$Brugerid."','".$Chatid."')";
     $MemberAdded = $connection->query($sqlMember);
+    return $MemberAdded;
 }
 
 ?>

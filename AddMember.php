@@ -4,6 +4,7 @@
     $connect = getConnectionAndCreateAll();
     $userName = $_POST['navn'];
     $brugerId = $_SESSION['user_id'];
+    $ChatId = $_POST['ChatId'];
     if(createChat($connect,$chatNavn,$brugerId)){
         header("location: http://localhost/ChatsystemMedVictor/brugerside.php");
     }
