@@ -12,7 +12,12 @@
         echo "<tr>";
         $ChatId = getChatIdFromMemberId($connection,$row);
         $Chat = getChat($_SESSION['connection'],$ChatId);
-        echo"<td><button type='submit'>'".$Chat['navn']."'</button></td>";
+        echo"<td>
+        <form action='Chat.php' method='post'>
+            <input type='hidden' name='ChatId' value=".$ChatId.">
+            <button type='submit'>'".$Chat['navn']."'</button>
+        </form>
+        </td>";
         echo "</tr>";
     }
     echo "</table>";

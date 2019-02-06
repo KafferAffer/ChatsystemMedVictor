@@ -40,7 +40,7 @@ function createDatabase($connection){
 }
 
 function createChatTable($connection){
-    $sql = "CREATE TABLE ChromeChat.CHAT (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, navn VARCHAR(30) NOT NULL)";
+    $sql = "CREATE TABLE ChromeChat.CHAT (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, navn VARCHAR(30) NOT NULL, user_id INT(6) UNSIGNED)";
     $tbCreated = $connection->query($sql);
     
     if($GLOBALS['debug']){
@@ -131,16 +131,15 @@ function createUser($connection, $navn, $password){
 }
 
 function createChat($connection, $Chatnavn, $Brugerid){
-    $sqlChat =  "INSERT INTO ChromeChat.CHAT (navn) VALUES ('".$Chatnavn."')";
+    $sqlChat =  "INSERT INTO ChromeChat.CHAT (navn,user_id) VALUES ('".$Chatnavn."','".$Brugerid."')";
     $chatCreated = $connection->query($sqlChat);
     
-    $sql = "SELECT CHAT.id FROM ChromeChat.CHAT WHERE navn='".$Chatnavn."' LIMIT 1";
+    $sql = "SELECT CHAT.id FROM ChromeChat.CHAT WHERE navn='".$Chatnavn."' AND user_id='".$Brugerid."' LIMIT 1";
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
     
+    addMember($connection, $row['id'], $Brugerid);
     
-    $sqlMember ="INSERT INTO ChromeChat.MEMBER (`user_id`, `chat_id`) VALUES ('".$Brugerid."','".$row['id']."')";
-    $MemberAdded = $connection->query($sqlMember);
     //debug beskeder
     if($GLOBALS['debug']){
         if ($userCreated) {
@@ -194,6 +193,11 @@ function getChat($connection,$ChatId){
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
     return $row;
+}
+
+function addMember($connection, $Chatid, $Brugerid){
+    $sqlMember ="INSERT INTO ChromeChat.MEMBER (`user_id`, `chat_id`) VALUES ('".$Brugerid."','".Chatid."')";
+    $MemberAdded = $connection->query($sqlMember);
 }
 
 ?>
