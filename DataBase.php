@@ -9,7 +9,7 @@ if($GLOBALS['debug']){
 
 function getConnectionAndCreateAll(){
     //her bliver Connection oprettet
-    $connect = new mysqli("localhost", "root","");
+    $connect = new mysqli("10.131.203.249", "root","");
     /*Nedenstående udkommenteret - kan bruges til debugging!!
     if ($connect->connect_error) {
         die("<br>Connection failed: " . $conn->connect_error);
