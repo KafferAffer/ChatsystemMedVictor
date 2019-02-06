@@ -1,0 +1,13 @@
+<?php
+    session_start();
+    include "database.php";
+    $connect = getConnectionAndCreateAll();
+    $userName = $_POST['navn'];
+    $brugerId = $_SESSION['user_id'];
+    $ChatId = $_POST['ChatId'];
+    if(createChat($connect,$chatNavn,$brugerId)){
+        header("location: http://localhost/ChatsystemMedVictor/brugerside.php");
+    }
+    echo "Chat blev ikke lavet";
+    echo "<a href='brugerSide.php'><button>Gå tilbage til brugerside</button></a>";
+?>
