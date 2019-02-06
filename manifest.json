@@ -1,0 +1,12 @@
+{
+    "name": "Getting Started Example",
+    "version": "1.0",
+    "description": "Build an Extension!",
+    "permissions": ["activeTab","storage","declarativeContent","http://localhost/*"],
+    "browser_action": {
+        "default_popup": "pop.html"
+    },
+    "manifest_version": 2
+    // "options_page": "options.html",
+    
+}
