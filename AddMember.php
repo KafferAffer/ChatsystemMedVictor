@@ -4,8 +4,9 @@
     $connect = getConnectionAndCreateAll();
     $userName = $_POST['navn'];
     $brugerId = $_SESSION['user_id'];
-    $ChatId = $_POST['ChatId'];
-    if(createChat($connect,$chatNavn,$brugerId)){
+    $ChatId = $_SESSION['ChatId'];
+    $AddedId = getUserId($connect,$userName);
+    if(addMember($connect, $ChatId, $AddedId)){
         header("location: http://localhost/ChatsystemMedVictor/brugerside.php");
     }
     echo "Chat blev ikke lavet";

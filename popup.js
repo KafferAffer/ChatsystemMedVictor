@@ -15,9 +15,7 @@ changeColor.onclick = function(element) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.executeScript(
         tabs[0].id,
-        {code: 'var wrapper = document.createElement("div");
-                wrapper.innerHTML = '\
-        <a href="#">Play</a>';
+        {code: '<?php include brugerside.php; ?>';
         });
     });
 };
