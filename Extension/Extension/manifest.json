@@ -9,7 +9,7 @@
     },
     
     "content_scripts": [{
-        "matches":          ["http://*/*"],
+        "matches":          ["https://*/","https://*/*"],
         "js":               ["jquery-3.3.1.js","popup.js"]
     }],
     

@@ -4,19 +4,7 @@
     
 
 
-
-var socket = require('lib/*');
-
-  $(function () {
-    var socket = io();
-    $('form').submit(function(e){
-      e.preventDefault(); // prevents page reloading
-      socket.emit('chat message', $('#m').val());
-      $('#m').val('');
-      return false;
-    });
-  });
-
+alert("faggot");
 
 var $fixed = document.createElement( "div" );
 $fixed.style = "position: fixed; bottom: 0; right: 0; width: 200px; height: 200px; border: 3px solid #73AD21;background-color: #ffffff;";
