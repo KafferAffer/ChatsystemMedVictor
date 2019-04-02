@@ -1,0 +1,20 @@
+{
+    "name": "Getting Started Example",
+    "version": "1.0",
+    "description": "Build an Extension!",
+    "permissions": ["activeTab","storage","declarativeContent"],
+    "background": {
+        "scripts":          ["jquery-3.3.1.js","background.js"],
+        "persistent":       true
+    },
+    
+    "content_scripts": [{
+        "matches":          ["http://*/*"],
+        "js":               ["jquery-3.3.1.js","popup.js"]
+    }],
+    
+    "browser_action": {
+    },
+    "options_page": "options.html",
+    "manifest_version": 2
+}
